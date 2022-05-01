@@ -1,8 +1,33 @@
-" For coc, set location 
-let g:python_host_prog = "/usr/bin/python2"
-let g:python3_host_prog = "/usr/bin/python3"
+filetype on 
+filetype plugin on
+filetype indent on
+syntax enable
+
+set number
+set nowrap
+set ignorecase
+set smartcase
+set incsearch
+
+set clipboard+=unnamedplus
+set nobackup
+set noswapfile
+
+set autoindent
+set smartindent
+set expandtab tabstop=2 shiftwidth=2 softtabstop=2 
+
+let mapleader=";"
+
+" Save on write 
+autocmd TextChanged,TextChangedI *
+    \ if &buftype ==# '' || &buftype == 'acwrite' |
+    \     silent write |
+    \ endif
 
 call plug#begin('~/.config/nvim/plugged')
+
+" Small plugins
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
@@ -12,16 +37,20 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'ggandor/lightspeed.nvim'
 
+Plug 'tpope/vim-commentary'
+
+" Big plugins
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'tpope/vim-commentary'
+nnoremap <leader>f <cmd>lua require('telescope.builtin').fd()<cr>
+nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 " Plug 'github/copilot.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-call plug#end()
 
 " Recommended coc setup
 
@@ -65,58 +94,41 @@ command! -nargs=0 Format   :call CocAction('format')
 command! -nargs=0 Prettier :call CocAction('prettier.formatFile')
 command! -nargs=0 OR       :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Other plug in binding
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-let g:lightline = {'colorscheme': 'tokyonight'}
-
-" Settings
-
-let mapleader=";"
-
-" Copy paste with system
-set clipboard+=unnamedplus
-
-" make Backspace work like Delete
-" set backspace=indent,eol,start
-
-" don't create `filename~` backups
-set nobackup
-
-" don't create temp files
-set noswapfile
-
-" Tab key enters 2 spaces
-" To enter a TAB character when `expandtab` is in effect,
-" CTRL-v-TAB
-set expandtab tabstop=2 shiftwidth=2 softtabstop=2 
-
-" Indent new line the same as the preceding line
-set autoindent
-set smartindent
-
-filetype on 
-filetype plugin on
-filetype indent on
-syntax enable
-
-set number
-set nowrap
-set ignorecase
-set smartcase
-set incsearch
+call plug#end()
 
 set termguicolors
 set background=dark
 colorscheme tokyonight
 
-" save on write only if in file (avoid tree issue)
-autocmd TextChanged,TextChangedI *
-    \ if &buftype ==# '' || &buftype == 'acwrite' |
-    \     silent write |
-    \ endif
+set noshowmode
+" let g:lightline = {
+"       \ 'colorscheme': 'tokyonight',
+"       \ 'active': {
+"       \   'right': [ [ 'percent' ],
+"       \              [ 'filetype'] ]
+"       \ },
+"       \ }
 
-" Leader related mappings
-let mapleader=";"
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
-nnoremap <leader>f <cmd>lua require('telescope.builtin').fd()<cr>
-nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
+let g:lightline = {
+      \ 'colorscheme': 'tokyonight',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'percent' ],
+      \              [ 'filetype'] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
+
