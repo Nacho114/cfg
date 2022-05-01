@@ -120,7 +120,7 @@ export PATH=~/.npm-global/bin:$PATH
 
 # My own edits
 
-export EDITOR=vim
+export EDITOR=nvim
 
 alias vim=nvim
 alias fd=fdfind
