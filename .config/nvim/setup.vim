@@ -25,7 +25,7 @@ autocmd TextChanged,TextChangedI *
     \     silent write |
     \ endif
 
-:command Cheat split ~/notes/cheatsheet.md  
+:command Cheat split ~/.config/nvim/cheatsheet.md  
 
 call plug#begin('~/.config/nvim/plugged')
 
