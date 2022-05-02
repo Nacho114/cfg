@@ -25,6 +25,8 @@ autocmd TextChanged,TextChangedI *
     \     silent write |
     \ endif
 
+:command Cheat split ~/notes/cheatsheet.md  
+
 call plug#begin('~/.config/nvim/plugged')
 
 " Small plugins
@@ -95,9 +97,8 @@ command! -nargs=0 Prettier :call CocAction('prettier.formatFile')
 command! -nargs=0 OR       :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <buffer> <leader>a  <Plug>(coc-codeaction-selected)j
+nmap <buffer> <leader>a  <Plug>(coc-codeaction-selected)j
 
 call plug#end()
 
@@ -106,29 +107,53 @@ set background=dark
 colorscheme tokyonight
 
 set noshowmode
-" let g:lightline = {
-"       \ 'colorscheme': 'tokyonight',
-"       \ 'active': {
-"       \   'right': [ [ 'percent' ],
-"       \              [ 'filetype'] ]
-"       \ },
-"       \ }
-
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
 
 let g:lightline = {
       \ 'colorscheme': 'tokyonight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'filename' ] ],
       \   'right': [ [ 'percent' ],
-      \              [ 'filetype'] ]
+      \              [ 'coc_info'],
+      \              [ 'coc_hint'],
+      \              [ 'coc_warning'],
+      \              [ 'coc_error'] ]
       \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \ 'component_expand': {
+      \   'coc_warning': 'CocWarnings',
+      \   'coc_error': 'CocErrors',
+      \   'coc_info'         : 'CocInfos',
+      \   'coc_hint'         : 'CocHints',
       \ },
       \ }
 
+
+let g:lightline.component_type = {
+\   'coc_error'        : 'error',
+\   'coc_warning'      : 'warning',
+\   'coc_info'         : 'tabsel',
+\   'coc_hint'         : 'middle',
+\ }
+
+function! s:get_coc_diagnostic(kind, sign) abort
+  let info = get(b:, 'coc_diagnostic_info', 0)
+  if empty(info) || get(info, a:kind, 0) == 0
+    return ''
+  endif
+  return printf('%s%d', a:sign, info[a:kind])
+endfunction
+
+function! CocErrors() abort
+  return s:get_coc_diagnostic('error', 'E')
+endfunction
+function! CocWarnings() abort
+  return s:get_coc_diagnostic('warning', 'W')
+endfunction
+function! CocInfos() abort
+  return s:get_coc_diagnostic('information', 'I')
+endfunction
+function! CocHints() abort
+  return s:get_coc_diagnostic('hint', 'H')
+endfunction
+
+autocmd User CocDiagnosticChange call lightline#update()
