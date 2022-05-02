@@ -125,6 +125,7 @@ export EDITOR=nvim
 alias vim=nvim
 alias fd=fdfind
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias open=xdg-open
 
 # use vim in terminal
 bindkey -v
