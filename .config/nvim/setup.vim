@@ -17,15 +17,12 @@ set autoindent
 set smartindent
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2 
 
-let mapleader=";"
+let mapleader=" "
 
-" Save on write 
-autocmd TextChanged,TextChangedI *
-    \ if &buftype ==# '' || &buftype == 'acwrite' |
-    \     silent write |
-    \ endif
+nnoremap <leader>w :write<cr>
 
 :command Cheat split ~/.config/nvim/cheatsheet.md  
+:command Vimc split ~/.config/nvim/setup.vim  
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -37,8 +34,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'itchyny/lightline.vim'
 
-Plug 'ggandor/lightspeed.nvim'
-
 Plug 'tpope/vim-commentary'
 
 " Big plugins
@@ -46,17 +41,17 @@ Plug 'tpope/vim-commentary'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-nnoremap <leader>f <cmd>lua require('telescope.builtin').fd()<cr>
-nnoremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fd <cmd>lua require('telescope.builtin').fd()<cr>
+nnoremap <leader>rg <cmd>lua require('telescope.builtin').live_grep()<cr>
 
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 " Recommended coc setup
 
-:nmap <space>e <Cmd>CocCommand explorer<CR>
+:nmap <leader>e <Cmd>CocCommand explorer<CR>
 
 set hidden
 set updatetime=300
@@ -112,12 +107,12 @@ let g:lightline = {
       \ 'colorscheme': 'tokyonight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'filename' ] ],
-      \   'right': [ [ 'percent' ],
+      \             [ 'filename' ],
       \              [ 'coc_info'],
       \              [ 'coc_hint'],
       \              [ 'coc_warning'],
-      \              [ 'coc_error'] ]
+      \              [ 'coc_error'] ],
+      \   'right': [ [ 'percent' ]]
       \ },
       \ 'component_expand': {
       \   'coc_warning': 'CocWarnings',

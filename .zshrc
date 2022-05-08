@@ -124,11 +124,17 @@ export EDITOR=nvim
 
 alias vim=nvim
 alias fd=fdfind
+alias ls=exa
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias open=xdg-open
+alias Cheat='less ~/.config/nvim/cheatsheet.md'
+alias Vimc='vim ~/.config/nvim/setup.vim'
 
 # use vim in terminal
 bindkey -v
+
+autoload -Uz compinit
+compinit
 
 # For Meson install
 export PATH=$HOME/.local/bin:$PATH
