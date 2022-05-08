@@ -1,5 +1,5 @@
 window:
-  decorations: None
+  decorations: none
 
   padding:
     x: 10
@@ -9,6 +9,9 @@ scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
   history: 99000
+
+selection:
+  save_to_clipboard: true
 
 # TokyoNight Alacritty Colors
 colors:
