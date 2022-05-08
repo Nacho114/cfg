@@ -2,12 +2,25 @@
 
 ## Git
 
+- git pull --prune -> todo: read on it
+- git log -p -> Show more info
+- git push --force-with-lease -> force push only if no new commit exists
+
 - git rebase -i main    -> rebase current branch with main
 - git rebase --continue -> continues rebase (e.g. after solving conflict)
 - git rebase --abort    -> aborts ongoing rebase
 - git commit --fixup=AZ -> commits changes to commit with id AZ
 (can use tab for autocomplete).
 - git reflog            -> reference log shows branch changes
+
+## Pop-shell
+
+- Super-m -> toggle between max-min size of window
+- Super-enter -> Enter window adjustment mode
+  - direction -> move window
+  - shift+direction -> resize window
+- Super-ctrl-direction -> toggle between workspace
+- Super-esc -> Lock screen
 
 ## Terminal
 
@@ -29,6 +42,7 @@
 - ctrl-o     -> go to last location
 - gx         -> open link (useful for .md navigation)
 - ctrl-i     -> visual block
+- zz         -> place current line in center of screen
 
 ## Text objects
 
@@ -132,3 +146,15 @@ example:
 
 - <C-x> go to file selection as a split
 - <C-v> go to file selection as a vsplit
+
+## Users
+
+### Ubuntu
+
+- Pop shell -> window tilling management
+- Alacritty
+- Firefox
+    [no tabs](https://superuser.com/questions/1424478/can-i-hide-native-tabs-at-the-top-of-firefox)
+    Tridactyl for vim
+- Enhanced terminal comands:  https://github.com/ibraheemdev/modern-unix
+
