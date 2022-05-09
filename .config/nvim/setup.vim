@@ -3,6 +3,10 @@ filetype plugin on
 filetype indent on
 syntax enable
 
+" Autosave >
+autocmd InsertLeave,TextChanged * if &readonly == 0 && filereadable(bufname('%'))
+                                 \ | silent update | endif
+
 set number
 set nowrap
 set ignorecase
@@ -26,7 +30,7 @@ nnoremap <leader>w :write<cr>
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Small plugins
+" Small plugins 
 
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
@@ -47,7 +51,6 @@ nnoremap <leader>rg <cmd>lua require('telescope.builtin').live_grep()<cr>
 Plug 'github/copilot.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 
 " Recommended coc setup
 
