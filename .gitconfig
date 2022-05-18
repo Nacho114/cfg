@@ -1,0 +1,43 @@
+
+[alias]
+	co = checkout
+	ps = push
+	pl = pull
+	cm = commit -m
+	st = status
+	l = log --pretty=oneline --graph --abbrev-commit
+
+[branch]
+	autosetuprebase = always
+	rebase = true
+
+[core]
+	editor = nvim
+  pager = delta
+
+[commit]
+	gpgsign = true
+
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com	
+
+[rebase]
+	autosquash = true
+	autoStash = true
+
+[init]
+  defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  side-by-side = true
+  line-numbers = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
