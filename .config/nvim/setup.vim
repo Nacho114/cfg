@@ -3,10 +3,8 @@ filetype plugin on
 filetype indent on
 syntax enable
 
-" Autosave >
 autocmd InsertLeave,TextChanged * if &readonly == 0 && filereadable(bufname('%'))
                                  \ | silent update | endif
-
 set number
 set nowrap
 set ignorecase
@@ -24,6 +22,8 @@ set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 let mapleader=" "
 
 nnoremap <leader>w :write<cr>
+nnoremap <leader>s :set spell<cr>
+nnoremap <leader>sn :set nospell<cr>
 
 :command Cheat split ~/.config/nvim/cheatsheet.md  
 :command Vimc split ~/.config/nvim/setup.vim  

@@ -13,6 +13,10 @@
 (can use tab for autocomplete).
 - git reflog            -> reference log shows branch changes
 
+- git show LOCATION -> if LOCATION == HEAD, shows last commit, 
+  HEAD^, previous, HEAD^^, before preious..., can also use 
+  LOCATION == 48fbfe6, if 48fbfe6 is a commit.
+
 ## Pop-shell
 
 - Super-m -> toggle between max-min size of window
