@@ -1,0 +1,21 @@
+{
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": ["typescript"],
+  "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "angular",
+    "css",
+    "go",
+    "html",
+    "markdown",
+    "proto",
+    "python",
+    "rust",
+    "svg",
+    "tf",
+    "toml",
+    "typescript",
+    "yaml"
+  ]
+}
